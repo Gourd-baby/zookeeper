@@ -4,6 +4,8 @@ import org.apache.zookeeper.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @version 1.0
  * @Author 作者名
@@ -20,11 +22,27 @@ public class ZKClient {
          zkClient = new ZooKeeper(connectionString, sessionTimeout, new Watcher() {
             @Override
             public void process(WatchedEvent watchedEvent) {
+                try {
+                    System.out.println("*****************");
+                    List<String> children = zkClient.getChildren("/", true);
+                    for (String child : children) {
+                        System.out.println(child);
+                    }
+                    System.out.println("*****************");
+                } catch (KeeperException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
     @Test
     public void create() throws Exception{
         String zkNode = zkClient.create("/crj", "crj".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+    }
+    @Test
+    public void getChildren() throws Exception{
+        Thread.sleep(Long.MAX_VALUE);
     }
 }
