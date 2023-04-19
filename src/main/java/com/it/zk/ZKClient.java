@@ -22,6 +22,7 @@ public class ZKClient {
          zkClient = new ZooKeeper(connectionString, sessionTimeout, new Watcher() {
             @Override
             public void process(WatchedEvent watchedEvent) {
+                //监听器
                 try {
                     System.out.println("*****************");
                     List<String> children = zkClient.getChildren("/", true);
@@ -37,12 +38,24 @@ public class ZKClient {
             }
         });
     }
+
+    /**
+     * 测试创建节点
+     * @throws Exception
+     */
     @Test
     public void create() throws Exception{
         String zkNode = zkClient.create("/crj", "crj".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
     }
+
+    /**
+     * 测试创建监听器，在上面的zookeeper里面
+     * @throws Exception
+     */
     @Test
     public void getChildren() throws Exception{
         Thread.sleep(Long.MAX_VALUE);
     }
+
+
 }
