@@ -16,7 +16,7 @@ public class DistributeLuckTest {
                 try {
                     lock1.lock();
                     System.out.println("线程 1 获取锁");
-                    Thread.sleep(5 * 1000);
+                    Thread.sleep(3 * 1000);
                     lock1.zkUnlock();
                     System.out.println("线程 1 释放锁");
                 } catch (Exception e) {
@@ -30,7 +30,7 @@ public class DistributeLuckTest {
                 try {
                     lock2.lock();
                     System.out.println("线程 2 获取锁");
-                    Thread.sleep(5 * 1000);
+                    Thread.sleep(3 * 1000);
                     lock2.zkUnlock();
                     System.out.println("线程 2 释放锁");
                 } catch (Exception e) {
